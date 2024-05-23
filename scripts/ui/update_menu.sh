@@ -20,24 +20,26 @@ function update_ui() {
   echo -e "| Klipper & API:         |---------------|--------------|"
   echo -e "|  1) [Klipper]          |$(compare_klipper_versions)|"
   echo -e "|  2) [Moonraker]        |$(compare_moonraker_versions)|"
+  echo -e "|  3) [DanyBot API]        |$(compare_moonraker_versions)|"
   echo -e "|                        |               |              |"
   echo -e "| Klipper Webinterface:  |---------------|--------------|"
-  echo -e "|  3) [Mainsail]         |$(compare_mainsail_versions)|"
-  echo -e "|  4) [Fluidd]           |$(compare_fluidd_versions)|"
+  echo -e "|  4) [Mainsail]         |$(compare_mainsail_versions)|"
+  echo -e "|  5) [Fluidd]           |$(compare_fluidd_versions)|"
+  echo -e "|  6) [DanyBot UI]           |$(compare_danybot_ui_versions)|"
   echo -e "|                        |               |              |"
   echo -e "| Touchscreen GUI:       |---------------|--------------|"
-  echo -e "|  5) [KlipperScreen]    |$(compare_klipperscreen_versions)|"
+  echo -e "|  7) [KlipperScreen]    |$(compare_klipperscreen_versions)|"
   echo -e "|                        |               |              |"
   echo -e "| Other:                 |---------------|--------------|"
-  echo -e "|  6) [PrettyGCode]      |$(compare_prettygcode_versions)|"
-  echo -e "|  7) [Telegram Bot]     |$(compare_telegram_bot_versions)|"
-  echo -e "|  8) [Obico for Klipper]|$(compare_moonraker_obico_versions)|"
-  echo -e "|  9) [OctoEverywhere]   |$(compare_octoeverywhere_versions)|"
-  echo -e "| 10) [Mobileraker]      |$(compare_mobileraker_versions)|"
-  echo -e "| 11) [Crowsnest]        |$(compare_crowsnest_versions)|"
-  echo -e "| 12) [OctoApp]          |$(compare_octoapp_versions)|"
+  echo -e "|  8) [PrettyGCode]      |$(compare_prettygcode_versions)|"
+  echo -e "|  9) [Telegram Bot]     |$(compare_telegram_bot_versions)|"
+  echo -e "| 10) [Obico for Klipper]|$(compare_moonraker_obico_versions)|"
+  echo -e "| 11) [OctoEverywhere]   |$(compare_octoeverywhere_versions)|"
+  echo -e "| 12) [Mobileraker]      |$(compare_mobileraker_versions)|"
+  echo -e "| 13) [Crowsnest]        |$(compare_crowsnest_versions)|"
+  echo -e "| 14) [OctoApp]          |$(compare_octoapp_versions)|"
   echo -e "|                        |------------------------------|"
-  echo -e "| 13) [System]           |  $(check_system_updates)   |"
+  echo -e "| 15) [System]           |  $(check_system_updates)   |"
   back_footer
 }
 
@@ -56,26 +58,30 @@ function update_menu() {
       2)
         do_action "update_moonraker" "update_ui";;
       3)
-        do_action "update_mainsail" "update_ui";;
+        do_action "update_danybot_api" "update_ui";;
       4)
-        do_action "update_fluidd" "update_ui";;
+        do_action "update_mainsail" "update_ui";;
       5)
-        do_action "update_klipperscreen" "update_ui";;
+        do_action "update_fluidd" "update_ui";;
       6)
-        do_action "update_pgc_for_klipper" "update_ui";;
+        do_action "update_danybot_ui" "update_ui";;
       7)
-        do_action "update_telegram_bot" "update_ui";;
+        do_action "update_klipperscreen" "update_ui";;
       8)
-        do_action "update_moonraker_obico" "update_ui";;
+        do_action "update_pgc_for_klipper" "update_ui";;
       9)
-        do_action "update_octoeverywhere" "update_ui";;
+        do_action "update_telegram_bot" "update_ui";;
       10)
-        do_action "update_mobileraker" "update_ui";;
+        do_action "update_moonraker_obico" "update_ui";;
       11)
-        do_action "update_crowsnest" "update_ui";;
+        do_action "update_octoeverywhere" "update_ui";;
       12)
-        do_action "update_octoapp" "update_ui";;
+        do_action "update_mobileraker" "update_ui";;
       13)
+        do_action "update_crowsnest" "update_ui";;
+      14)
+        do_action "update_octoapp" "update_ui";;
+      15)
         do_action "upgrade_system_packages" "update_ui";;
       a)
         do_action "update_all" "update_ui";;
