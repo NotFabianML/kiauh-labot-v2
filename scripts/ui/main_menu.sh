@@ -19,7 +19,7 @@ function main_ui() {
   echo -e "|                  |            Repo: $(print_klipper_repo)|"
   echo -e "|  1) [Install]    |                                    |"
   echo -e "|  2) [Update]     |       Moonraker: $(print_status "moonraker")|"
-  echo -e "|  3) [Remove]     |     DanyBot API: $(print_status "danybot_api")|"
+  echo -e "|  3) [Remove]     |     DanyBot API: |"
   echo -e "|  4) [Advanced]   |                                    |"
   echo -e "|  5) [Backup]     |        Mainsail: $(print_status "mainsail")|"
   echo -e "|                  |          Fluidd: $(print_status "fluidd")|"

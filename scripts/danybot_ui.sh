@@ -399,7 +399,7 @@ function danybot_ui_port_check() {
         select_danybot_ui_port
       fi
     else
-      DEFAULT_PORT=$(grep listen "${KIAUH_SRCDIR}/resources/danybot_ui" | head -1 | sed 's/^\s*//' | cut -d" " -f2 | cut -d";" -f1)
+      DEFAULT_PORT=$(grep listen "${KIAUH_SRCDIR}/resources/fluidd" | head -1 | sed 's/^\s*//' | cut -d" " -f2 | cut -d";" -f1)
       SET_LISTEN_PORT=${DEFAULT_PORT}
     fi
     SET_NGINX_CFG="true"
