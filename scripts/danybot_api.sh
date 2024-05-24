@@ -3,7 +3,7 @@
 set -e
 
 # Define paths for your DanyBot API application
-DANYBOT_API_DIR="${HOME}/vial_lab_pick_and_place/app"
+DANYBOT_API_DIR="${HOME}/vial_lab_pick_and_place"
 DANYBOT_API_ENV="${DANYBOT_API_DIR}/env"
 DANYBOT_API_REPO="https://github.com/bdouglas89/vial_lab_pick_and_place.git"
 
@@ -66,7 +66,7 @@ After=network.target
 User=${USER}
 WorkingDirectory=${DANYBOT_API_DIR}
 Environment="PATH=${DANYBOT_API_ENV}/bin"
-ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app.py
+ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app/app.py
 
 [Install]
 WantedBy=multi-user.target
