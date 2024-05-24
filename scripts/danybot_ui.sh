@@ -176,11 +176,11 @@ function download_danybot_ui() {
 
   status_msg "Downloading DanyBot UI from ${url} ..."
 
-  if [[ -d ${FLUIDD_DIR} ]]; then
-    rm -rf "${FLUIDD_DIR}"
+  if [[ -d ${DANYBOT_UI_DIR} ]]; then
+    rm -rf "${DANYBOT_UI_DIR}"
   fi
 
-  mkdir "${FLUIDD_DIR}" && cd "${FLUIDD_DIR}"
+  mkdir "${DANYBOT_UI_DIR}" && cd "${DANYBOT_UI_DIR}"
 
   if wget "${url}"; then
     ok_msg "Download complete!"
@@ -199,10 +199,10 @@ function download_danybot_ui() {
 #===================================================#
 
 function remove_danybot_ui_dir() {
-  [[ ! -d ${FLUIDD_DIR} ]] && return
+  [[ ! -d ${DANYBOT_UI_DIR} ]] && return
 
   status_msg "Removing DanyBot UI directory ..."
-  rm -rf "${FLUIDD_DIR}" && ok_msg "Directory removed!"
+  rm -rf "${DANYBOT_UI_DIR}" && ok_msg "Directory removed!"
 }
 
 function remove_danybot_ui_nginx_config() {
@@ -298,7 +298,7 @@ function update_danybot_ui() {
 
 function get_danybot_ui_status() {
   local status
-  local data_arr=("${FLUIDD_DIR}" "${NGINX_SA}/danybot_ui" "${NGINX_SE}/danybot_ui")
+  local data_arr=("${DANYBOT_UI_DIR}" "${NGINX_SA}/danybot_ui" "${NGINX_SE}/danybot_ui")
 
   ### count+1 for each found data-item from array
   local filecount=0
@@ -317,8 +317,8 @@ function get_danybot_ui_status() {
 }
 
 function get_local_danybot_ui_version() {
-  local versionfile="${FLUIDD_DIR}/.version"
-  local relinfofile="${FLUIDD_DIR}/release_info.json"
+  local versionfile="${DANYBOT_UI_DIR}/.version"
+  local relinfofile="${DANYBOT_UI_DIR}/release_info.json"
   local version
 
   if [[ -f ${relinfofile} ]]; then

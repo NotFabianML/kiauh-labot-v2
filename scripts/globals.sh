@@ -46,6 +46,9 @@ function set_globals() {
   #================== FLUIDD ====================#
   FLUIDD_DIR="${HOME}/fluidd"
 
+  #================ DANYBOT UI ==================#
+  DANYBOT_UI_DIR="${HOME}/danybot_ui"
+
   #=============== KLIPPERSCREEN ================#
   KLIPPERSCREEN_ENV="${HOME}/.KlipperScreen-env"
   KLIPPERSCREEN_DIR="${HOME}/KlipperScreen"
