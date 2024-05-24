@@ -20,7 +20,7 @@ function install_danybot_api_dependencies() {
   
   # Install required Python packages
   "${DANYBOT_API_ENV}/bin/pip" install -U pip
-  "${DANYBOT_API_ENV}/bin/pip" install -r "${DANYBOT_API_DIR}/requirements.txt"
+  "${DANYBOT_API_ENV}/bin/pip" install -r "${DANYBOT_API_DIR}/app/requirements.txt"
 }
 
 # Function to create Python virtual environment
