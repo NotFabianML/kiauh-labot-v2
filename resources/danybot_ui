@@ -1,10 +1,10 @@
-# /etc/nginx/sites-available/fluidd
+# /etc/nginx/sites-available/danybot_ui
 
 server {
     listen 80;
 
-    access_log /var/log/nginx/fluidd-access.log;
-    error_log /var/log/nginx/fluidd-error.log;
+    access_log /var/log/nginx/danybot_ui-access.log;
+    error_log /var/log/nginx/danybot_ui-error.log;
 
     # disable this section on smaller hardware like a pi zero
     gzip on;
@@ -16,8 +16,8 @@ server {
     gzip_http_version 1.1;
     gzip_types text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/json application/xml;
 
-    # web_path from fluidd static files
-    root /home/pi/fluidd;
+    # web_path from danybot_ui static files
+    root /home/pi/danybot_ui;
 
     index index.html;
     server_name _;
