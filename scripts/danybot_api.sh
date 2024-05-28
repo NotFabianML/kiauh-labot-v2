@@ -79,6 +79,31 @@ EOL
   ok_msg "DanyBot API service created and started!"
 }
 
+function get_danybot_api_status() {
+  local sf_count status
+  sf_count="$(danybot_api_systemd | wc -w)"
+
+  ### remove the "SERVICE" entry from the data array if a danybot_api service is installed
+  local data_arr=(SERVICE "${DANYBOT_API_DIR}" "${DANYBOT_API_ENV}")
+  (( sf_count > 0 )) && unset "data_arr[0]"
+
+  ### count+1 for each found data-item from array
+  local filecount=0
+  for data in "${data_arr[@]}"; do
+    [[ -e ${data} ]] && filecount=$(( filecount + 1 ))
+  done
+
+  if (( filecount == ${#data_arr[*]} )); then
+    status="Installed: ${sf_count}"
+  elif (( filecount == 0 )); then
+    status="Not installed!"
+  else
+    status="Incomplete!"
+  fi
+
+  echo "${status}"
+}
+
 # Function to display status messages
 function status_msg() {
   echo -e "\033[1;34m$1\033[0m"
