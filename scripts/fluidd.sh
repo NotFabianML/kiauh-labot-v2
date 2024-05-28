@@ -364,7 +364,7 @@ function get_fluidd_download_url() {
   local releases_by_tag tags tag unstable_url url
 
   ### latest stable download url
-  url="https://github.com/NotFabianML/danybot-ui/releases/latest/download/fluidd.zip"
+  url="https://github.com/NotFabianML/danybot-ui/releases/latest/download/danybot_ui.zip"
 
   read_kiauh_ini "${FUNCNAME[0]}"
   if [[ ${fluidd_install_unstable} == "true" ]]; then
