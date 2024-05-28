@@ -79,6 +79,24 @@ EOL
   ok_msg "DanyBot API service created and started!"
 }
 
+function danybot_api_systemd() {
+  local services
+  local blacklist
+  local ignore
+  local match
+
+  ###
+  # any moonraker client that uses "moonraker" in its own name must be blacklisted using
+  # this variable, otherwise they will be falsely recognized as moonraker instances
+  blacklist="obico"
+
+  ignore="${SYSTEMD}/danybot_api-(${blacklist}).service"
+  match="${SYSTEMD}/danybot_api(-[0-9a-zA-Z]+)?.service"
+
+  services=$(find "${SYSTEMD}" -maxdepth 1 -regextype awk ! -regex "${ignore}" -regex "${match}" | sort)
+  echo "${services}"
+}
+
 function get_danybot_api_status() {
   local sf_count status
   sf_count="$(danybot_api_systemd | wc -w)"
