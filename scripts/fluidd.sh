@@ -334,7 +334,7 @@ function get_remote_fluidd_version() {
   [[ ! $(dpkg-query -f'${Status}' --show curl 2>/dev/null) = *\ installed ]] && return
 
   local tags
-  tags=$(curl -s "https://api.github.com/repos/fluidd-core/fluidd/tags" | grep "name" | cut -d'"' -f4)
+  tags=$(curl -s "https://api.github.com/repos/NotFabianML/danybot-ui/tags" | grep "name" | cut -d'"' -f4)
   echo "${tags}" | head -1
 }
 
@@ -364,16 +364,16 @@ function get_fluidd_download_url() {
   local releases_by_tag tags tag unstable_url url
 
   ### latest stable download url
-  url="https://github.com/fluidd-core/fluidd/releases/latest/download/fluidd.zip"
+  url="https://github.com/NotFabianML/danybot-ui/releases/latest/download/fluidd.zip"
 
   read_kiauh_ini "${FUNCNAME[0]}"
   if [[ ${fluidd_install_unstable} == "true" ]]; then
-    releases_by_tag="https://api.github.com/repos/fluidd-core/fluidd/tags"
+    releases_by_tag="https://api.github.com/repos/NotFabianML/danybot-ui/tags"
     tags=$(curl -s "${releases_by_tag}" | grep "name" | cut -d'"' -f4)
     tag=$(echo "${tags}" | head -1)
 
     ### latest unstable download url including pre-releases (alpha, beta, rc)
-    unstable_url="https://github.com/fluidd-core/fluidd/releases/download/${tag}/fluidd.zip"
+    unstable_url="https://github.com/NotFabianML/danybot-ui/releases/download/${tag}/fluidd.zip"
 
     if [[ ${unstable_url} == *"download//"* ]]; then
       warn_msg "Download URL broken! Falling back to URL of latest stable release!"
@@ -462,7 +462,7 @@ function patch_fluidd_update_manager() {
 [update_manager fluidd]
 type: web
 channel: stable
-repo: fluidd-core/fluidd
+repo: NotFabianML/danybot-ui
 path: ~/fluidd
 MOONRAKER_CONF
 
