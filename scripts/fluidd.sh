@@ -373,7 +373,7 @@ function get_fluidd_download_url() {
     tag=$(echo "${tags}" | head -1)
 
     ### latest unstable download url including pre-releases (alpha, beta, rc)
-    unstable_url="https://github.com/NotFabianML/danybot-ui/releases/download/${tag}/fluidd.zip"
+    unstable_url="https://github.com/NotFabianML/danybot-ui/releases/download/${tag}/danybot_ui.zip"
 
     if [[ ${unstable_url} == *"download//"* ]]; then
       warn_msg "Download URL broken! Falling back to URL of latest stable release!"
