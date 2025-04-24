@@ -180,7 +180,7 @@ function clone_danybot_api() {
 #================ UPDATE MOONRAKER ================#
 #==================================================#
 
-function update_moonraker() {
+function update_danybot_api() {
   do_action_service "stop" "danybot_api"
 
   if [[ ! -d ${DANYBOT_API_DIR} ]]; then
