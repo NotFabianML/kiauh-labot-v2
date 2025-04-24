@@ -68,7 +68,7 @@ After=network.target
 User=${USER}
 WorkingDirectory=${DANYBOT_API_DIR}
 Environment="PATH=${DANYBOT_API_ENV}/bin"
-ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app.py
+ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app.py --host="0.0.0.0"
 
 [Install]
 WantedBy=multi-user.target
