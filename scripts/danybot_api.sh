@@ -3,9 +3,11 @@
 set -e
 
 # Define paths for your DanyBot API application
-DANYBOT_API_DIR="${HOME}/vial_lab_pick_and_place"
+DANYBOT_API_DIR="${HOME}/danybot-api-v2"
 DANYBOT_API_ENV="${DANYBOT_API_DIR}/env"
-DANYBOT_API_REPO="https://github.com/bdouglas89/vial_lab_pick_and_place.git"
+# DANYBOT_API_REPO="https://github.com/bdouglas89/vial_lab_pick_and_place.git"
+DANYBOT_API_REPO="https://github.com/NotFabianML/danybot-api-v2.git"
+
 
 # Function to install DanyBot API dependencies
 function install_danybot_api_dependencies() {
@@ -20,7 +22,7 @@ function install_danybot_api_dependencies() {
   
   # Install required Python packages
   "${DANYBOT_API_ENV}/bin/pip" install -U pip
-  "${DANYBOT_API_ENV}/bin/pip" install -r "${DANYBOT_API_DIR}/app/requirements.txt"
+  "${DANYBOT_API_ENV}/bin/pip" install -r "${DANYBOT_API_DIR}/requirements.txt"
 }
 
 # Function to create Python virtual environment
