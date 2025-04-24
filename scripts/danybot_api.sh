@@ -68,7 +68,7 @@ After=network.target
 User=${USER}
 WorkingDirectory=${DANYBOT_API_DIR}
 Environment="PATH=${DANYBOT_API_ENV}/bin"
-ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app.py
+ExecStart=${DANYBOT_API_ENV}/bin/python -m flask run
 
 [Install]
 WantedBy=multi-user.target
@@ -86,7 +86,8 @@ function danybot_api_systemd() {
   local blacklist
   local ignore
   local match
-
+# esto va en la linea 71
+# ExecStart=${DANYBOT_API_ENV}/bin/python ${DANYBOT_API_DIR}/app.py
   ###
   # any moonraker client that uses "moonraker" in its own name must be blacklisted using
   # this variable, otherwise they will be falsely recognized as moonraker instances
