@@ -159,3 +159,45 @@ function install_danybot_api() {
   danybot_api_setup
   ok_msg "DanyBot API setup complete!"
 }
+
+
+function clone_danybot_api() {
+  local repo=${1}
+
+  status_msg "Cloning Moonraker from ${repo} ..."
+
+  ### force remove existing danybot_api dir and clone into fresh danybot_api dir
+  [[ -d ${DANYBOT_API_DIR} ]] && rm -rf "${DANYBOT_API_DIR}"
+
+  cd "${HOME}" || exit 1
+  if ! git clone "${DANYBOT_API_REPO}" "${DANYBOT_API_DIR}"; then
+    print_error "Cloning Danybot Api from\n ${repo}\n failed!"
+    exit 1
+  fi
+}
+
+#==================================================#
+#================ UPDATE MOONRAKER ================#
+#==================================================#
+
+function update_moonraker() {
+  do_action_service "stop" "danybot_api"
+
+  if [[ ! -d ${DANYBOT_API_DIR} ]]; then
+    clone_danybot_api "${DANYBOT_API_REPO}"
+  else
+    backup_before_update "danybot_api"
+    status_msg "Updating Danybot Api ..."
+    cd "${DANYBOT_API_DIR}" && git pull
+    ### read PKGLIST and install possible new dependencies
+    install_danybot_api_dependencies
+    ### install possible new python dependencies
+    "${MOONRAKER_ENV}"/bin/pip install -r "${DANYBOT_API_DIR}/requirements.txt"
+  fi
+
+  ### required due to https://github.com/Arksine/moonraker/issues/349
+  # install_moonraker_polkit || true
+
+  ok_msg "Update complete!"
+  do_action_service "restart" "danybot_api"
+}
