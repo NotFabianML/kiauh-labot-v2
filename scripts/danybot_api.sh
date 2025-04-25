@@ -89,8 +89,8 @@ function danybot_api_systemd() {
 # esto va en la linea 71
 # ExecStart=${DANYBOT_API_ENV}/bin/python -m flask run
   ###
-  # any moonraker client that uses "moonraker" in its own name must be blacklisted using
-  # this variable, otherwise they will be falsely recognized as moonraker instances
+  # any danybot_api client that uses "danybot_api" in its own name must be blacklisted using
+  # this variable, otherwise they will be falsely recognized as danybot_api instances
   blacklist="obico"
 
   ignore="${SYSTEMD}/danybot_api-(${blacklist}).service"
@@ -165,7 +165,7 @@ function install_danybot_api() {
 function clone_danybot_api() {
   local repo=${1}
 
-  status_msg "Cloning Moonraker from ${repo} ..."
+  status_msg "Cloning danybot_api from ${repo} ..."
 
   ### force remove existing danybot_api dir and clone into fresh danybot_api dir
   [[ -d ${DANYBOT_API_DIR} ]] && rm -rf "${DANYBOT_API_DIR}"
@@ -178,7 +178,7 @@ function clone_danybot_api() {
 }
 
 #==================================================#
-#================ UPDATE MOONRAKER ================#
+#================ UPDATE danybot_api ================#
 #==================================================#
 
 function update_danybot_api() {
@@ -193,12 +193,48 @@ function update_danybot_api() {
     ### read PKGLIST and install possible new dependencies
     install_danybot_api_dependencies
     ### install possible new python dependencies
-    "${MOONRAKER_ENV}"/bin/pip install -r "${DANYBOT_API_DIR}/requirements.txt"
+    "${danybot_api_ENV}"/bin/pip install -r "${DANYBOT_API_DIR}/requirements.txt"
   fi
 
-  ### required due to https://github.com/Arksine/moonraker/issues/349
-  # install_moonraker_polkit || true
+  ### required due to https://github.com/Arksine/danybot_api/issues/349
+  # install_danybot_api_polkit || true
 
   ok_msg "Update complete!"
   do_action_service "restart" "danybot_api"
+}
+
+function get_local_danybot_api_commit() {
+  [[ ! -d ${DANYBOT_API_DIR} || ! -d "${DANYBOT_API_DIR}/.git" ]] && return
+
+  local commit
+  cd "${DANYBOT_API_DIR}"
+  commit="$(git describe HEAD --always --tags | cut -d "-" -f 1,2)"
+  echo "${commit}"
+}
+
+function get_remote_danybot_api_commit() {
+  [[ ! -d ${DANYBOT_API_DIR} || ! -d "${DANYBOT_API_DIR}/.git" ]] && return
+
+  local commit
+  cd "${DANYBOT_API_DIR}" && git fetch origin -q
+  commit=$(git describe origin/master --always --tags | cut -d "-" -f 1,2)
+  echo "${commit}"
+}
+
+function compare_danybot_api_versions() {
+  local versions local_ver remote_ver
+  local_ver="$(get_local_danybot_api_commit)"
+  remote_ver="$(get_remote_danybot_api_commit)"
+
+  if [[ ${local_ver} != "${remote_ver}" ]]; then
+    versions="${yellow}$(printf " %-14s" "${local_ver}")${white}"
+    versions+="|${green}$(printf " %-13s" "${remote_ver}")${white}"
+    # add danybot_api to application_updates_available in kiauh.ini
+    add_to_application_updates "danybot_api"
+  else
+    versions="${green}$(printf " %-14s" "${local_ver}")${white}"
+    versions+="|${green}$(printf " %-13s" "${remote_ver}")${white}"
+  fi
+
+  echo "${versions}"
 }
